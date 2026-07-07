@@ -1,0 +1,209 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// Admin
+// ─────────────────────────────────────────────
+model Admin {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      AdminRole @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  ADMIN
+}
+
+// ─────────────────────────────────────────────
+// Games
+// ─────────────────────────────────────────────
+model Game {
+  id           String      @id @default(cuid())
+  name         String
+  slug         String      @unique
+  description  String      @db.Text
+  category     GameCategory
+  image        String
+  pricePerHour Decimal     @db.Decimal(10, 2)
+  totalSeats   Int
+  isAvailable  Boolean     @default(true)
+  isFeatured   Boolean     @default(false)
+  order        Int         @default(0)
+  specs        Json?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  bookings     Booking[]
+}
+
+enum GameCategory {
+  PC
+  PS5
+  XBOX
+  VR
+  RACING
+  MOBILE
+}
+
+// ─────────────────────────────────────────────
+// Pricing
+// ─────────────────────────────────────────────
+model PricingPlan {
+  id          String      @id @default(cuid())
+  name        String
+  type        PlanType
+  price       Decimal     @db.Decimal(10, 2)
+  duration    String
+  description String?     @db.Text
+  features    Json
+  isPopular   Boolean     @default(false)
+  isActive    Boolean     @default(true)
+  order       Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+enum PlanType {
+  HOURLY
+  MEMBERSHIP
+  WEEKEND
+  SPECIAL
+}
+
+// ─────────────────────────────────────────────
+// Food & Drinks
+// ─────────────────────────────────────────────
+model FoodItem {
+  id          String        @id @default(cuid())
+  name        String
+  description String?       @db.Text
+  category    FoodCategory
+  price       Decimal       @db.Decimal(10, 2)
+  image       String?
+  isAvailable Boolean       @default(true)
+  isFeatured  Boolean       @default(false)
+  order       Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  bookingFood BookingFood[]
+}
+
+enum FoodCategory {
+  SNACKS
+  COLD_DRINKS
+  ENERGY_DRINKS
+  COMBOS
+  HOT_FOOD
+}
+
+// ─────────────────────────────────────────────
+// Gallery
+// ─────────────────────────────────────────────
+model GalleryImage {
+  id        String          @id @default(cuid())
+  title     String?
+  url       String
+  thumbnail String?
+  category  GalleryCategory @default(GENERAL)
+  alt       String?
+  order     Int             @default(0)
+  isActive  Boolean         @default(true)
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+}
+
+enum GalleryCategory {
+  GENERAL
+  GAMING
+  EVENTS
+  FOOD
+  INTERIOR
+}
+
+// ─────────────────────────────────────────────
+// Bookings
+// ─────────────────────────────────────────────
+model Booking {
+  id             String        @id @default(cuid())
+  bookingId      String        @unique @default(cuid())
+  name           String
+  email          String
+  phone          String
+  gameId         String
+  game           Game          @relation(fields: [gameId], references: [id])
+  date           DateTime
+  startTime      String
+  endTime        String
+  duration       Int           // in hours
+  status         BookingStatus @default(PENDING)
+  totalAmount    Decimal       @db.Decimal(10, 2)
+  specialRequest String?       @db.Text
+  paymentStatus  PaymentStatus @default(PENDING)
+  foodItems      BookingFood[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+  NO_SHOW
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
+}
+
+model BookingFood {
+  id        String    @id @default(cuid())
+  bookingId String
+  booking   Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  foodId    String
+  food      FoodItem  @relation(fields: [foodId], references: [id])
+  quantity  Int       @default(1)
+  price     Decimal   @db.Decimal(10, 2)
+}
+
+// ─────────────────────────────────────────────
+// Contact Messages
+// ─────────────────────────────────────────────
+model ContactMessage {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String        @db.Text
+  isRead    Boolean       @default(false)
+  createdAt DateTime      @default(now())
+}
+
+// ─────────────────────────────────────────────
+// Site Settings
+// ─────────────────────────────────────────────
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  label     String?
+  group     String?
+  updatedAt DateTime @updatedAt
+}
