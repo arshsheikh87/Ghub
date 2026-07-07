@@ -1,23 +1,24 @@
-// Homepage — implemented in Phase 4
+import type { Metadata } from "next";
+import { HeroSection } from "@/components/home/HeroSection";
+import { FeaturesSection } from "@/components/home/FeaturesSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
+import { FAQSection } from "@/components/home/FAQSection";
+import { CTASection } from "@/components/home/CTASection";
+
+export const metadata: Metadata = {
+  title: "NexusPlay Gaming Cafe — Where Gaming Meets Excellence",
+  description:
+    "Premium gaming cafe in Badarpur with RTX 4090 PCs, PS5, Xbox, VR & Racing simulators. Book your session online.",
+};
+
 export default function HomePage() {
   return (
-    <main>
-      <div style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-        gap: "1rem",
-        color: "#fff",
-        background: "#0a0a0f",
-        fontFamily: "system-ui"
-      }}>
-        <h1 style={{ fontSize: "2rem", background: "linear-gradient(135deg,#8b5cf6,#00d4ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-          NexusPlay Gaming Cafe
-        </h1>
-        <p style={{ color: "rgba(255,255,255,0.5)" }}>Phase 1 complete — Project foundation ready.</p>
-      </div>
-    </main>
+    <>
+      <HeroSection />
+      <FeaturesSection />
+      <TestimonialsSection />
+      <FAQSection />
+      <CTASection />
+    </>
   );
 }

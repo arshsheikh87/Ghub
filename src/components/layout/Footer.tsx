@@ -243,6 +243,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-purple-400 transition-colors">
               Terms of Service
             </Link>
+            <Link href="/refund" className="hover:text-purple-400 transition-colors">
+              Refund Policy
+            </Link>
           </div>
         </motion.div>
       </div>
