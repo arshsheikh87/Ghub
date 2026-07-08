@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/home/HeroSection";
-import { FeaturesSection } from "@/components/home/FeaturesSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { FAQSection } from "@/components/home/FAQSection";
-import { CTASection } from "@/components/home/CTASection";
+import {
+  HeroSection,
+  ImageShowcaseSection,
+  FeaturesSection,
+  TestimonialsSection,
+  FAQSection,
+  CTASection,
+} from "@/components/home";
 
 export const metadata: Metadata = {
   title: "NexusPlay Gaming Cafe — Where Gaming Meets Excellence",
@@ -15,10 +18,11 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ImageShowcaseSection />
       <FeaturesSection />
       <TestimonialsSection />
       <FAQSection />
-      <CTASection />
+      {/* <CTASection /> */}
     </>
   );
 }

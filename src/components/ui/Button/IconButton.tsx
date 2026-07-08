@@ -1,5 +1,7 @@
 "use client";
 
+// Suppress TS error when react types are not found in some environments
+// @ts-ignore: Could not find module 'react' or its corresponding type declarations.
 import { forwardRef } from "react";
 import { cn } from "@/utils/cn";
 import { buttonVariants, iconButtonSizeClasses, iconSizeClasses } from "./variants";

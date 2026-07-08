@@ -1,4 +1,5 @@
 export { HeroSection } from "./HeroSection";
+export { ImageShowcaseSection } from "./ImageShowcaseSection";
 export { FeaturesSection } from "./FeaturesSection";
 export { TestimonialsSection } from "./TestimonialsSection";
 export { FAQSection } from "./FAQSection";
