@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Camera, Gamepad2, Pizza, Sword, Trophy, Users } from "lucide-react";
+import { Camera, Gamepad2, Pizza, Trophy, Users } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const SHOWCASE_IMAGES = [
@@ -17,8 +17,8 @@ const SHOWCASE_IMAGES = [
   {
     title: "PS5 Lounge",
     image:
-      "https://images.unsplash.com/photo-1605901309584-818e25960a8b?auto=format&fit=crop&w=900&q=80",
-    alt: "Console gaming lounge with large screens",
+      "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=900&q=80",
+    alt: "PlayStation lounge with console setup and large screen",
     icon: Trophy,
     span: "",
   },
@@ -31,28 +31,20 @@ const SHOWCASE_IMAGES = [
     span: "",
   },
   {
+    title: "Cafe Environment",
+    image:
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+    alt: "Warm interior seating area in a modern gaming cafe",
+    icon: Camera,
+    span: "lg:col-span-2",
+  },
+  {
     title: "Party Nights",
     image:
-      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=900&q=80",
-    alt: "Group of friends enjoying a gaming party",
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80",
+    alt: "Group of friends enjoying a gaming party night",
     icon: Users,
-    span: "md:col-span-2",
-  },
-  {
-    title: "VR Experience",
-    image:
-      "https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=900&q=80",
-    alt: "Virtual reality gaming setup with headset",
-    icon: Sword,
-    span: "",
-  },
-  {
-    title: "Cafe Atmosphere",
-    image:
-      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=900&q=80",
-    alt: "Warm interior seating area in a modern cafe",
-    icon: Camera,
-    span: "",
+    span: "sm:col-span-2 lg:col-span-4",
   },
 ];
 
